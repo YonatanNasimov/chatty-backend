@@ -1,0 +1,20 @@
+# .editorconfig => if there is many developers on a project the editorconfig file meke them to use in the same coding style
+# prettierrc.json => code formater
+
+root = true
+
+# apply to every type of file
+[*] 
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{ts,js}]
+quote_type = single
+
+[*.md]
+max_line_length = off
+trim_trailing_whitespace = false
