@@ -30,6 +30,7 @@
     "hpp": "^0.2.3",
     "http-status-codes": "^2.2.0",
     "init": "^0.1.2",
+    "joi": "^17.9.2",
     "mongoose": "^7.0.4",
     "redis": "^4.6.5",
     "socket.io": "^4.6.1",
