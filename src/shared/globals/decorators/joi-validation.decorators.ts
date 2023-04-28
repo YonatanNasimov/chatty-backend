@@ -4,7 +4,7 @@ import { ObjectSchema } from "joi";
 
 type IJoiDecorator = (target: any, key: string, descriptor: PropertyDescriptor) => void;
 
-//validtion with joi library.
+//validtion with joi library creat a decorator to use at method controler to signup.
 export function joiValidation(schema: ObjectSchema): IJoiDecorator {
     return (_target: any, _key: string, descriptor: PropertyDescriptor) => {
         const originalMethod = descriptor.value;
