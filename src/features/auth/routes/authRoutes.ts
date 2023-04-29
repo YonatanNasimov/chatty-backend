@@ -9,7 +9,11 @@ class AuthRoutes {
     }
 
     public routes(): Router {
-        this.router.post('/sigup', SignUp.prototype.create)
+        //test
+        // this.router.get("/", (req, res) => { 
+        //     res.json({ msg: "express work..." })
+        // });
+        this.router.post('/signup', SignUp.prototype.create)
         return this.router
     }
 };
