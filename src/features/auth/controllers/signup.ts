@@ -6,6 +6,8 @@ import { IAuthDocument, ISignUpData } from '@auth/interfaces/auth.interface';
 import { authService } from "@service/db/auth.service";
 import { BadRequestError } from "@global/helpers/error-handler";
 import { Helpers } from "@global/helpers/helpers";
+import { UploadApiResponse } from "cloudinary";
+import { uploads } from "@global/helpers/cloudinary-upload";
 
 export class SignUp {
     @joiValidation(signupSchema)
@@ -19,6 +21,9 @@ export class SignUp {
         const authObjectId: ObjectId = new ObjectId();
         const userObjectId: ObjectId = new ObjectId();
         const uId = `${Helpers.generateRandomIntegers(12)}`;
+        // the reason we are using SignUp.prototype.signupData and not this.signupData is because
+        // of how we invoke the create method in the routes method.
+        // the scope of the this object is not kept when the method is invoked
         const authData: IAuthDocument = SignUp.prototype.signupData({
             _id: authObjectId,
             uId,
@@ -27,6 +32,11 @@ export class SignUp {
             password,
             avatarColor
         });
+        const result: UploadApiResponse = await uploads(avatarImage, `${userObjectId}`, true, true) as UploadApiResponse;
+        //https://res.cloudinary.com/123/userObjectId
+        if (!result?.public_id) {
+            throw new BadRequestError('File upload: Error occurred. Try again.')
+        }
     }
 
     private signupData(data: ISignUpData): IAuthDocument {
