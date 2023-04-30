@@ -39,7 +39,7 @@ export class SignUp {
             throw new BadRequestError('File upload: Error occurred. Try again.');
         }
 
-        res.status(HTTP_STATUS.CREATED).json({ message: "User created succesfully" });
+        res.status(HTTP_STATUS.CREATED).json({ message: "User created succesfully", authData });
     }
 
     private signupData(data: ISignUpData): IAuthDocument {
